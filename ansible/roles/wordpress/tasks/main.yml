@@ -1,0 +1,14 @@
+- name: wordpress-download
+  get_url: 
+    url: "{{ wordpress_url }}" 
+    dest: /tmp/wordpress.tar.gz
+    timeout: 300
+
+- name: deploy wordpress
+  unarchive: src=/tmp/wordpress.tar.gz dest=/var/www/html/ copy=no
+
+- name: change ownwer
+  file: path=/var/www/html/wordpress/ owner=apache group=apache recurse=yes
+
+- name: httpd restart
+  service: name=httpd state=restarted

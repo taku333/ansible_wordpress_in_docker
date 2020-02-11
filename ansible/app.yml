@@ -1,0 +1,9 @@
+- name: deploy app
+  hosts: app
+  become: yes
+  roles:
+          #       - common
+       - httpd
+       - php
+       - wordpress
+

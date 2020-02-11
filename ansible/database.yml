@@ -1,0 +1,6 @@
+- name: deploy database
+  hosts: database
+  become: yes
+  roles:
+          #      - common
+      - mysql

@@ -1,0 +1,20 @@
+- name: Install mariadb
+  yum : name="{{ item }}" state=latest
+  with_items:
+    - mariadb
+    - mariadb-server
+    - MySQL-python
+
+- name: Start Mariadb
+  service: name=mariadb state=started enabled=yes
+
+- name: Creaet Database
+  mysql_db: name="{{ db_name }}" state=present encoding=utf8
+
+- name: Create Database User
+  mysql_user: >
+    name={{ db_user }}
+    password={{ db_password }}
+    priv={{ db_name }}.*:ALL
+    host="%"
+    state=present

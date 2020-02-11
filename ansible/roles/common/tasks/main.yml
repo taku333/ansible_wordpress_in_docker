@@ -1,0 +1,4 @@
+- name: SELinux-disable
+  selinux:
+    policy: targeted
+    state: disabled
